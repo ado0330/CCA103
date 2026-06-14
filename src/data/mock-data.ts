@@ -1,0 +1,503 @@
+import { User, Property, RoommatePreference, TenancyApplication, ScamReport, MatchResult, Lease } from "@/types";
+
+// ============================================
+// Mock Users
+// ============================================
+export const mockUsers: User[] = [
+  // Students
+  {
+    id: "s1",
+    role: "student",
+    name: "Ahmad Rizal",
+    email: "ahmad.rizal@student.usm.my",
+    verified: true,
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Ahmad",
+    status: "active",
+    university: "USM",
+    phone: "+60 12-345 6789",
+  },
+  {
+    id: "s2",
+    role: "student",
+    name: "Sarah Tan",
+    email: "sarah.tan@student.usm.my",
+    verified: true,
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Sarah",
+    status: "active",
+    university: "USM",
+    phone: "+60 12-456 7890",
+  },
+  {
+    id: "s3",
+    role: "student",
+    name: "Priya Nair",
+    email: "priya.nair@student.usm.my",
+    verified: true,
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Priya",
+    status: "active",
+    university: "USM",
+  },
+  {
+    id: "s4",
+    role: "student",
+    name: "Wei Jie Lim",
+    email: "weijie.lim@student.usm.my",
+    verified: true,
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=WeiJie",
+    status: "active",
+    university: "USM",
+  },
+  {
+    id: "s5",
+    role: "student",
+    name: "Aisha Abdullah",
+    email: "aisha.a@student.usm.my",
+    verified: true,
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Aisha",
+    status: "active",
+    university: "USM",
+  },
+  {
+    id: "s6",
+    role: "student",
+    name: "Raj Kumar",
+    email: "raj.kumar@student.usm.my",
+    verified: true,
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Raj",
+    status: "active",
+    university: "USM",
+  },
+  {
+    id: "s7",
+    role: "student",
+    name: "Mei Ling Wong",
+    email: "meiling.wong@student.usm.my",
+    verified: false,
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=MeiLing",
+    status: "active",
+    university: "USM",
+  },
+  {
+    id: "s8",
+    role: "student",
+    name: "Farid Hassan",
+    email: "farid.h@student.usm.my",
+    verified: true,
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Farid",
+    status: "suspended",
+    university: "USM",
+  },
+  // Landlords
+  {
+    id: "l1",
+    role: "landlord",
+    name: "Mr. Tan Ah Kow",
+    email: "tan.ahkow@gmail.com",
+    verified: true,
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=TanAhKow",
+    status: "active",
+    phone: "+60 16-789 0123",
+  },
+  {
+    id: "l2",
+    role: "landlord",
+    name: "Puan Siti Aminah",
+    email: "siti.aminah@gmail.com",
+    verified: true,
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=SitiAminah",
+    status: "active",
+    phone: "+60 17-890 1234",
+  },
+  {
+    id: "l3",
+    role: "landlord",
+    name: "Mr. Ravi Chandran",
+    email: "ravi.c@outlook.com",
+    verified: false,
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Ravi",
+    status: "active",
+    phone: "+60 18-901 2345",
+  },
+  // Admin
+  {
+    id: "a1",
+    role: "admin",
+    name: "Admin UniStay",
+    email: "admin@unistay.my",
+    verified: true,
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Admin",
+    status: "active",
+  },
+];
+
+// ============================================
+// Mock Properties
+// ============================================
+export const mockProperties: Property[] = [
+  {
+    id: "p1",
+    landlordId: "l1",
+    title: "Sunny Heights Apartment",
+    description:
+      "Modern fully-furnished apartment just minutes from USM main campus. Features air-conditioning in all rooms, high-speed WiFi, and a spacious common area. Perfect for students who value comfort and convenience.",
+    address: "12, Jalan Sungai Dua, 11700 Gelugor, Penang",
+    monthlyRent: 450,
+    images: [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&h=500&fit=crop",
+    ],
+    amenities: ["WiFi", "Air-Con", "Washing Machine", "Parking", "Furnished"],
+    availableRooms: 2,
+    totalRooms: 4,
+    status: "approved",
+    propertyType: "apartment",
+    distanceToUSM: "1.2 km",
+    createdAt: "2025-11-15T08:00:00Z",
+  },
+  {
+    id: "p2",
+    landlordId: "l1",
+    title: "Green View Residence",
+    description:
+      "Peaceful residential house with garden view. Located in a quiet neighborhood ideal for focused studying. Includes shared kitchen, living room, and laundry area.",
+    address: "45, Lorong 11/4, Taman Sri Nibong, 11900 Bayan Lepas, Penang",
+    monthlyRent: 380,
+    images: [
+      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=500&fit=crop",
+    ],
+    amenities: ["WiFi", "Garden", "Washing Machine", "Kitchen", "Water Heater"],
+    availableRooms: 1,
+    totalRooms: 3,
+    status: "approved",
+    propertyType: "house",
+    distanceToUSM: "3.5 km",
+    createdAt: "2025-12-01T10:00:00Z",
+  },
+  {
+    id: "p3",
+    landlordId: "l2",
+    title: "Campus Edge Studio",
+    description:
+      "Cozy studio unit right at the doorstep of USM. Ideal for postgraduate students. Comes with a private bathroom, mini kitchen, and study desk. All utilities included in rent.",
+    address: "8, Jalan USM, 11800 Minden, Penang",
+    monthlyRent: 600,
+    images: [
+      "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&h=500&fit=crop",
+    ],
+    amenities: ["WiFi", "Air-Con", "Private Bathroom", "Mini Kitchen", "Study Desk", "Utilities Included"],
+    availableRooms: 1,
+    totalRooms: 1,
+    status: "approved",
+    propertyType: "studio",
+    distanceToUSM: "0.3 km",
+    createdAt: "2026-01-10T14:00:00Z",
+  },
+  {
+    id: "p4",
+    landlordId: "l2",
+    title: "Harmony House",
+    description:
+      "Spacious double-storey house perfect for a group of students. Features a large living room, 5 bedrooms, and 3 bathrooms. Close to public transport and convenience stores.",
+    address: "22, Jalan Masjid Negeri, 11600 George Town, Penang",
+    monthlyRent: 350,
+    images: [
+      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?w=800&h=500&fit=crop",
+    ],
+    amenities: ["WiFi", "Parking", "Washing Machine", "Kitchen", "Near Bus Stop"],
+    availableRooms: 3,
+    totalRooms: 5,
+    status: "approved",
+    propertyType: "house",
+    distanceToUSM: "5.0 km",
+    createdAt: "2026-02-20T09:00:00Z",
+  },
+  {
+    id: "p5",
+    landlordId: "l3",
+    title: "The Loft @ Jelutong",
+    description:
+      "Modern loft-style apartment with industrial design. Open floor plan with mezzanine sleeping area. Great city views and modern amenities.",
+    address: "Level 15, Straits Residences, Jelutong, 11600 Penang",
+    monthlyRent: 750,
+    images: [
+      "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=500&fit=crop",
+    ],
+    amenities: ["WiFi", "Air-Con", "Gym", "Pool", "Security", "Parking", "City View"],
+    availableRooms: 1,
+    totalRooms: 2,
+    status: "pending",
+    propertyType: "apartment",
+    distanceToUSM: "7.0 km",
+    createdAt: "2026-03-05T11:00:00Z",
+  },
+  {
+    id: "p6",
+    landlordId: "l1",
+    title: "Budget Room @ Sungai Dua",
+    description:
+      "Affordable single room in a shared house. Basic but clean and well-maintained. Shared bathroom and kitchen. Great for budget-conscious students.",
+    address: "67, Jalan Sungai Dua, 11700 Gelugor, Penang",
+    monthlyRent: 250,
+    images: [
+      "https://images.unsplash.com/photo-1598928506311-c55ez637b483?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1586105251261-72a756497a31?w=800&h=500&fit=crop",
+    ],
+    amenities: ["WiFi", "Washing Machine", "Kitchen"],
+    availableRooms: 2,
+    totalRooms: 4,
+    status: "approved",
+    propertyType: "room",
+    distanceToUSM: "1.5 km",
+    createdAt: "2026-03-15T16:00:00Z",
+  },
+  {
+    id: "p7",
+    landlordId: "l3",
+    title: "Seaside Condo Unit",
+    description:
+      "Premium condo with sea view. Fully furnished with modern appliances. Access to condo facilities including swimming pool, gym, and BBQ area.",
+    address: "Marinox Sky Villas, Tanjung Tokong, 10470 Penang",
+    monthlyRent: 900,
+    images: [
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&h=500&fit=crop",
+    ],
+    amenities: ["WiFi", "Air-Con", "Pool", "Gym", "Sea View", "Security", "Fully Furnished"],
+    availableRooms: 2,
+    totalRooms: 3,
+    status: "rejected",
+    propertyType: "apartment",
+    distanceToUSM: "12.0 km",
+    createdAt: "2026-04-01T08:00:00Z",
+  },
+  {
+    id: "p8",
+    landlordId: "l2",
+    title: "Scholar's Den",
+    description:
+      "Purpose-built student accommodation with study rooms, high-speed internet, and 24/7 security. Walking distance to USM engineering campus.",
+    address: "3, Jalan Sungai Dua, 11700 Gelugor, Penang",
+    monthlyRent: 500,
+    images: [
+      "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&h=500&fit=crop",
+    ],
+    amenities: ["WiFi", "Air-Con", "Study Room", "Security", "Laundry", "CCTV"],
+    availableRooms: 4,
+    totalRooms: 8,
+    status: "approved",
+    propertyType: "room",
+    distanceToUSM: "0.8 km",
+    createdAt: "2026-04-10T12:00:00Z",
+  },
+];
+
+// ============================================
+// Mock Roommate Preferences
+// ============================================
+export const mockPreferences: RoommatePreference[] = [
+  {
+    id: "pref1",
+    studentId: "s1",
+    budgetMin: 300,
+    budgetMax: 500,
+    cleanliness: 4,
+    sleepSchedule: "early",
+    studyHabit: "quiet",
+    smoking: false,
+    gender: "male",
+    bio: "Engineering student who likes to keep things tidy. Early riser, gym enthusiast.",
+  },
+  {
+    id: "pref2",
+    studentId: "s2",
+    budgetMin: 350,
+    budgetMax: 600,
+    cleanliness: 5,
+    sleepSchedule: "late",
+    studyHabit: "quiet",
+    smoking: false,
+    gender: "female",
+    bio: "Art & Design student. Night owl who enjoys painting and reading.",
+  },
+  {
+    id: "pref3",
+    studentId: "s3",
+    budgetMin: 300,
+    budgetMax: 450,
+    cleanliness: 3,
+    sleepSchedule: "early",
+    studyHabit: "social",
+    smoking: false,
+    gender: "female",
+    bio: "Computer Science student. Love group study sessions and cooking.",
+  },
+  {
+    id: "pref4",
+    studentId: "s4",
+    budgetMin: 400,
+    budgetMax: 700,
+    cleanliness: 4,
+    sleepSchedule: "late",
+    studyHabit: "social",
+    smoking: false,
+    gender: "male",
+    bio: "Business student. Social butterfly who enjoys sports and music.",
+  },
+  {
+    id: "pref5",
+    studentId: "s5",
+    budgetMin: 250,
+    budgetMax: 400,
+    cleanliness: 5,
+    sleepSchedule: "early",
+    studyHabit: "quiet",
+    smoking: false,
+    gender: "female",
+    bio: "Pharmacy student. Very organized and likes quiet environments.",
+  },
+  {
+    id: "pref6",
+    studentId: "s6",
+    budgetMin: 300,
+    budgetMax: 550,
+    cleanliness: 3,
+    sleepSchedule: "late",
+    studyHabit: "social",
+    smoking: true,
+    gender: "male",
+    bio: "Mechanical Engineering student. Casual gamer and football fan.",
+  },
+];
+
+// ============================================
+// Mock Match Results
+// ============================================
+export const mockMatchResults: MatchResult[] = [
+  {
+    id: "m1",
+    requesterId: "s1",
+    targetId: "s4",
+    compatibilityScore: 82,
+    status: "pending",
+    matchBreakdown: { budget: 35, cleanliness: 22, sleepSchedule: 8, studyHabit: 7, smoking: 10 },
+  },
+  {
+    id: "m2",
+    requesterId: "s1",
+    targetId: "s3",
+    compatibilityScore: 75,
+    status: "accepted",
+    matchBreakdown: { budget: 38, cleanliness: 18, sleepSchedule: 15, studyHabit: 4, smoking: 10 },
+  },
+  {
+    id: "m3",
+    requesterId: "s2",
+    targetId: "s5",
+    compatibilityScore: 88,
+    status: "pending",
+    matchBreakdown: { budget: 32, cleanliness: 25, sleepSchedule: 8, studyHabit: 10, smoking: 10 },
+  },
+];
+
+// ============================================
+// Mock Applications
+// ============================================
+export const mockApplications: TenancyApplication[] = [
+  {
+    id: "app1",
+    propertyId: "p1",
+    applicantId: "s1",
+    roommateIds: ["s3"],
+    documents: ["student_id.pdf", "offer_letter.pdf"],
+    status: "pending",
+    message: "Hi, I am a 3rd year engineering student looking for a room near campus. I am tidy and respectful.",
+    createdAt: "2026-05-01T10:00:00Z",
+  },
+  {
+    id: "app2",
+    propertyId: "p3",
+    applicantId: "s2",
+    roommateIds: [],
+    documents: ["student_id.pdf"],
+    status: "approved",
+    message: "Interested in the studio unit. I am a postgraduate student and prefer a quiet environment.",
+    createdAt: "2026-04-20T14:00:00Z",
+  },
+  {
+    id: "app3",
+    propertyId: "p4",
+    applicantId: "s4",
+    roommateIds: ["s6"],
+    documents: ["student_id.pdf", "bank_statement.pdf"],
+    status: "rejected",
+    message: "Looking for affordable housing for two. We are both final year students.",
+    createdAt: "2026-04-25T09:00:00Z",
+  },
+  {
+    id: "app4",
+    propertyId: "p8",
+    applicantId: "s5",
+    roommateIds: [],
+    documents: ["student_id.pdf", "offer_letter.pdf"],
+    status: "pending",
+    message: "I am interested in Scholar's Den. Very organized and quiet tenant.",
+    createdAt: "2026-05-10T11:00:00Z",
+  },
+];
+
+// ============================================
+// Mock Leases
+// ============================================
+export const mockLeases: Lease[] = [
+  {
+    id: "lease1",
+    applicationId: "app2",
+    propertyId: "p3",
+    tenantIds: ["s2"],
+    leaseStart: "2026-06-01",
+    leaseEnd: "2027-05-31",
+    monthlyRent: 600,
+    signed: true,
+  },
+];
+
+// ============================================
+// Mock Scam Reports
+// ============================================
+export const mockReports: ScamReport[] = [
+  {
+    id: "r1",
+    reporterId: "s1",
+    targetUserId: "l3",
+    reason: "Suspicious listing - price too low for location",
+    description: "The listed property at premium location has an unusually low rent. Might be a scam listing to attract students.",
+    status: "open",
+    createdAt: "2026-05-05T08:00:00Z",
+  },
+  {
+    id: "r2",
+    reporterId: "s4",
+    targetUserId: "s8",
+    reason: "Fake student profile",
+    description: "This user claims to be a USM student but their profile seems fake. They were asking for deposit money directly.",
+    status: "investigating",
+    createdAt: "2026-05-08T15:00:00Z",
+  },
+  {
+    id: "r3",
+    reporterId: "s3",
+    targetUserId: "l3",
+    reason: "Unresponsive after deposit",
+    description: "Paid viewing fee but landlord never responded to schedule viewing. Possible scam.",
+    status: "resolved",
+    createdAt: "2026-04-15T12:00:00Z",
+  },
+];
