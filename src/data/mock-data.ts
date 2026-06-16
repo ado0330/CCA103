@@ -246,8 +246,8 @@ export const mockProperties: Property[] = [
     address: "67, Jalan Sungai Dua, 11700 Gelugor, Penang",
     monthlyRent: 250,
     images: [
-      "https://images.unsplash.com/photo-1598928506311-c55ez637b483?w=800&h=500&fit=crop",
-      "https://images.unsplash.com/photo-1586105251261-72a756497a31?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&h=500&fit=crop",
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&h=500&fit=crop",
     ],
     amenities: ["WiFi", "Washing Machine", "Kitchen"],
     availableRooms: 2,
