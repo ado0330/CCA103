@@ -24,12 +24,12 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
     <Link href={`/properties/${property.id}`}>
       <Card
         className={cn(
-          "group overflow-hidden hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 border-border/50 cursor-pointer",
+          "group overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1",
           className
         )}
       >
         {/* Image */}
-        <div className="relative h-48 overflow-hidden">
+        <div className="relative h-48 overflow-hidden rounded-t-2xl">
           <Image
             src={property.images[0]}
             alt={property.title}
@@ -37,11 +37,11 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
             className="object-cover group-hover:scale-105 transition-transform duration-500"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
 
           {/* Price Badge */}
           <div className="absolute bottom-3 left-3">
-            <Badge className="bg-white/95 text-foreground font-bold text-sm px-3 py-1 shadow-lg backdrop-blur-sm">
+            <Badge className="bg-white/95 text-foreground font-bold text-sm px-3 py-1 shadow-lg backdrop-blur-sm border-0">
               RM {property.monthlyRent}
               <span className="text-xs font-normal text-muted-foreground ml-1">/mo</span>
             </Badge>
@@ -51,7 +51,7 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
           <div className="absolute top-3 left-3">
             <Badge
               variant="secondary"
-              className="bg-black/50 text-white border-0 text-xs backdrop-blur-sm capitalize"
+              className="bg-black/40 text-white border-0 text-xs backdrop-blur-sm capitalize"
             >
               {property.propertyType}
             </Badge>
@@ -88,7 +88,7 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
               <Badge
                 key={amenity}
                 variant="outline"
-                className="text-[10px] px-1.5 py-0 font-normal gap-1"
+                className="text-[10px] px-1.5 py-0 font-normal gap-1 bg-accent/30"
               >
                 {amenityIcons[amenity] || null}
                 {amenity}
@@ -97,7 +97,7 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
             {property.amenities.length > 4 && (
               <Badge
                 variant="outline"
-                className="text-[10px] px-1.5 py-0 font-normal"
+                className="text-[10px] px-1.5 py-0 font-normal bg-accent/30"
               >
                 +{property.amenities.length - 4}
               </Badge>
@@ -105,7 +105,7 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-between pt-1 border-t border-border/50">
+          <div className="flex items-center justify-between pt-2 border-t border-border/30">
             <span className="text-xs text-muted-foreground flex items-center gap-1">
               <BedDouble className="h-3 w-3" />
               {property.totalRooms} rooms total

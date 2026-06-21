@@ -38,13 +38,13 @@ export function LandlordDashboard() {
   const occupancyRate = totalRooms > 0 ? Math.round((occupiedRooms / totalRooms) * 100) : 0;
 
   return (
-    <div className="space-y-6 animate-slide-up">
+    <div className="space-y-8 animate-slide-up">
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
+          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
             Landlord Dashboard 🏠
           </h1>
-          <p className="text-muted-foreground mt-1">
+          <p className="text-muted-foreground mt-1.5 text-[15px]">
             Manage your properties and tenant applications.
           </p>
         </div>
@@ -56,7 +56,7 @@ export function LandlordDashboard() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         <StatsCard
           title="Total Properties"
           value={myProperties.length}
@@ -84,7 +84,7 @@ export function LandlordDashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Applications */}
-        <Card className="border-border/50">
+        <Card>
           <CardHeader className="pb-3">
             <CardTitle className="text-lg flex items-center justify-between">
               Recent Applications
@@ -102,16 +102,16 @@ export function LandlordDashboard() {
                 <p className="text-sm">No pending applications</p>
               </div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {pendingApps.slice(0, 3).map((app) => {
                   const property = myProperties.find((p) => p.id === app.propertyId);
                   return (
                     <div
                       key={app.id}
-                      className="flex items-center justify-between p-3 rounded-lg bg-accent/30 border border-border/50"
+                      className="flex items-center justify-between p-3.5 rounded-xl bg-accent/30"
                     >
                       <div>
-                        <p className="text-sm font-medium">
+                        <p className="text-sm font-semibold">
                           {property?.title || "Unknown Property"}
                         </p>
                         <p className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
@@ -134,7 +134,7 @@ export function LandlordDashboard() {
         </Card>
 
         {/* Property Overview */}
-        <Card className="border-border/50">
+        <Card>
           <CardHeader className="pb-3">
             <CardTitle className="text-lg flex items-center justify-between">
               Your Properties
@@ -146,14 +146,14 @@ export function LandlordDashboard() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               {myProperties.slice(0, 4).map((property) => (
                 <div
                   key={property.id}
-                  className="flex items-center justify-between p-3 rounded-lg hover:bg-accent/30 transition-colors"
+                  className="flex items-center justify-between p-3.5 rounded-xl hover:bg-accent/30 transition-colors"
                 >
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate">
+                    <p className="text-sm font-semibold truncate">
                       {property.title}
                     </p>
                     <p className="text-xs text-muted-foreground mt-0.5">
@@ -168,7 +168,7 @@ export function LandlordDashboard() {
                         ? "secondary"
                         : "destructive"
                     }
-                    className="text-xs"
+                    className="text-xs capitalize"
                   >
                     {property.status}
                   </Badge>

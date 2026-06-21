@@ -37,19 +37,19 @@ export function StudentDashboard() {
   const approvedApps = applications.filter((a) => a.status === "approved").length;
 
   return (
-    <div className="space-y-6 animate-slide-up">
+    <div className="space-y-8 animate-slide-up">
       {/* Welcome */}
       <div>
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
+        <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
           Welcome back, {currentUser.name.split(" ")[0]}! 👋
         </h1>
-        <p className="text-muted-foreground mt-1">
+        <p className="text-muted-foreground mt-1.5 text-[15px]">
           Here&apos;s what&apos;s happening with your housing search.
         </p>
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         <StatsCard
           title="Active Applications"
           value={activeApps}
@@ -74,15 +74,17 @@ export function StudentDashboard() {
       {/* Quick Actions & Featured Properties */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Quick Actions */}
-        <Card className="border-border/50">
+        <Card>
           <CardHeader className="pb-3">
             <CardTitle className="text-lg">Quick Actions</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="space-y-2.5">
             <Link href="/properties">
               <Button variant="outline" className="w-full justify-between h-12 group">
-                <span className="flex items-center gap-2">
-                  <Building className="h-4 w-4 text-primary" />
+                <span className="flex items-center gap-2.5">
+                  <span className="h-8 w-8 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Building className="h-4 w-4 text-primary" />
+                  </span>
                   Browse Properties
                 </span>
                 <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
@@ -90,8 +92,10 @@ export function StudentDashboard() {
             </Link>
             <Link href="/roommate">
               <Button variant="outline" className="w-full justify-between h-12 group">
-                <span className="flex items-center gap-2">
-                  <Heart className="h-4 w-4 text-pink-500" />
+                <span className="flex items-center gap-2.5">
+                  <span className="h-8 w-8 rounded-xl bg-pink-500/10 flex items-center justify-center">
+                    <Heart className="h-4 w-4 text-pink-500" />
+                  </span>
                   Find Roommates
                 </span>
                 <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
@@ -99,8 +103,10 @@ export function StudentDashboard() {
             </Link>
             <Link href="/applications">
               <Button variant="outline" className="w-full justify-between h-12 group">
-                <span className="flex items-center gap-2">
-                  <FileText className="h-4 w-4 text-amber-500" />
+                <span className="flex items-center gap-2.5">
+                  <span className="h-8 w-8 rounded-xl bg-amber-500/10 flex items-center justify-center">
+                    <FileText className="h-4 w-4 text-amber-500" />
+                  </span>
                   View Applications
                 </span>
                 <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:translate-x-1 transition-transform" />
@@ -110,7 +116,7 @@ export function StudentDashboard() {
         </Card>
 
         {/* Featured Properties */}
-        <Card className="border-border/50">
+        <Card>
           <CardHeader className="pb-3">
             <CardTitle className="text-lg flex items-center justify-between">
               Featured Properties
@@ -121,14 +127,14 @@ export function StudentDashboard() {
               </Link>
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3">
+          <CardContent className="space-y-2">
             {properties.slice(0, 3).map((property) => (
               <Link
                 key={property.id}
                 href={`/properties/${property.id}`}
-                className="flex items-center gap-3 p-2 rounded-lg hover:bg-accent/50 transition-colors group"
+                className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-accent/50 transition-all duration-200 group"
               >
-                <div className="relative h-14 w-20 rounded-lg overflow-hidden flex-shrink-0">
+                <div className="relative h-14 w-20 rounded-xl overflow-hidden flex-shrink-0 shadow-sm">
                   <Image
                     src={property.images[0]}
                     alt={property.title}
@@ -138,13 +144,13 @@ export function StudentDashboard() {
                   />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate">{property.title}</p>
+                  <p className="text-sm font-semibold truncate">{property.title}</p>
                   <div className="flex items-center gap-2 mt-0.5">
                     <span className="text-xs text-muted-foreground flex items-center gap-1">
                       <MapPin className="h-3 w-3" />
                       {property.distanceToUSM}
                     </span>
-                    <Badge variant="secondary" className="text-xs px-1.5 py-0">
+                    <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
                       <DollarSign className="h-3 w-3" />
                       RM {property.monthlyRent}/mo
                     </Badge>

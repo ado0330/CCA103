@@ -7,16 +7,6 @@ import { useUserStore } from "@/stores/user-store";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import {
   MapPin,
   BedDouble,
@@ -27,7 +17,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { toast } from "sonner";
 
 export default function PropertyDetailPage({
   params,
@@ -41,8 +30,6 @@ export default function PropertyDetailPage({
   const { currentUser, currentRole, getUserById } = useUserStore();
   const { submitApplication, getApplicationsByApplicant } = useApplicationStore();
 
-  const [message, setMessage] = useState("");
-  const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
 
   if (!property) {
@@ -62,20 +49,7 @@ export default function PropertyDetailPage({
   const myApplications = getApplicationsByApplicant(currentUser.id);
   const hasApplied = myApplications.some((a) => a.propertyId === property.id);
 
-  const handleApply = () => {
-    submitApplication({
-      propertyId: property.id,
-      applicantId: currentUser.id,
-      roommateIds: [],
-      documents: ["student_id.pdf"],
-      message,
-    });
-    setDialogOpen(false);
-    setMessage("");
-    toast.success("Application submitted!", {
-      description: "Your rental application has been sent to the landlord.",
-    });
-  };
+
 
   return (
     <div className="space-y-6 animate-slide-up">
@@ -218,39 +192,12 @@ export default function PropertyDetailPage({
                       Already Applied
                     </Button>
                   ) : property.availableRooms > 0 ? (
-                    <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                      <DialogTrigger
-                        render={
-                          <Button className="w-full h-12 text-base gap-2" />
-                        }
-                      >
+                    <Link href={`/apply?propertyId=${property.id}`}>
+                      <Button className="w-full h-12 text-base gap-2">
                         <Send className="h-4 w-4" />
                         Apply Now
-                      </DialogTrigger>
-                      <DialogContent>
-                        <DialogHeader>
-                          <DialogTitle>Apply for {property.title}</DialogTitle>
-                          <DialogDescription>
-                            Send a message to the landlord with your application.
-                          </DialogDescription>
-                        </DialogHeader>
-                        <Textarea
-                          placeholder="Introduce yourself and why you'd be a great tenant..."
-                          value={message}
-                          onChange={(e) => setMessage(e.target.value)}
-                          rows={4}
-                        />
-                        <DialogFooter>
-                          <Button
-                            variant="outline"
-                            onClick={() => setDialogOpen(false)}
-                          >
-                            Cancel
-                          </Button>
-                          <Button onClick={handleApply}>Submit Application</Button>
-                        </DialogFooter>
-                      </DialogContent>
-                    </Dialog>
+                      </Button>
+                    </Link>
                   ) : (
                     <Button disabled variant="secondary" className="w-full h-12">
                       No Rooms Available

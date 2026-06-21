@@ -74,7 +74,7 @@ export function PropertyFilters({
           <Input
             id="property-search"
             placeholder="Search properties, locations..."
-            className="pl-10 h-11"
+            className="pl-10 h-11 rounded-xl bg-white shadow-sm"
             value={filters.searchQuery || ""}
             onChange={(e) => updateFilter({ searchQuery: e.target.value || undefined })}
           />
@@ -82,7 +82,7 @@ export function PropertyFilters({
         <Button
           variant={showAdvanced ? "default" : "outline"}
           size="icon"
-          className="h-11 w-11"
+          className="h-11 w-11 rounded-xl"
           onClick={() => setShowAdvanced(!showAdvanced)}
         >
           <SlidersHorizontal className="h-4 w-4" />
@@ -91,7 +91,7 @@ export function PropertyFilters({
 
       {/* Advanced Filters */}
       {showAdvanced && (
-        <div className="p-4 rounded-xl border border-border/50 bg-card space-y-4 animate-slide-up">
+        <div className="p-5 rounded-2xl bg-white shadow-card space-y-4 animate-slide-up">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="space-y-2">
               <Label className="text-xs font-medium">Min Budget (RM)</Label>

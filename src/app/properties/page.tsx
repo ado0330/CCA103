@@ -13,12 +13,12 @@ export default function PropertiesPage() {
   const filteredProperties = getFilteredProperties(filters);
 
   return (
-    <div className="space-y-6 animate-slide-up">
+    <div className="space-y-8 animate-slide-up">
       <div>
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
+        <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
           Find Your Home 🏠
         </h1>
-        <p className="text-muted-foreground mt-1">
+        <p className="text-muted-foreground mt-1.5 text-[15px]">
           Browse verified properties near USM campus.
         </p>
       </div>
@@ -30,7 +30,7 @@ export default function PropertiesPage() {
       />
 
       {filteredProperties.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {filteredProperties.map((property) => (
             <PropertyCard key={property.id} property={property} />
           ))}

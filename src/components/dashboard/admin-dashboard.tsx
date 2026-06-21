@@ -34,17 +34,17 @@ export function AdminDashboard() {
   const suspendedUsers = users.filter((u) => u.status === "suspended");
 
   return (
-    <div className="space-y-6 animate-slide-up">
+    <div className="space-y-8 animate-slide-up">
       <div>
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
+        <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
           Admin Dashboard 🛡️
         </h1>
-        <p className="text-muted-foreground mt-1">
+        <p className="text-muted-foreground mt-1.5 text-[15px]">
           Platform overview and pending actions.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         <StatsCard
           title="Pending Verifications"
           value={unverifiedLandlords.length}
@@ -83,7 +83,7 @@ export function AdminDashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Pending Property Approvals */}
-        <Card className="border-border/50">
+        <Card>
           <CardHeader className="pb-3">
             <CardTitle className="text-lg flex items-center justify-between">
               Property Approval Queue
@@ -101,7 +101,7 @@ export function AdminDashboard() {
                 <p className="text-sm">No pending approvals</p>
               </div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {pendingProperties.map((property) => {
                   const landlord = users.find(
                     (u) => u.id === property.landlordId
@@ -109,10 +109,10 @@ export function AdminDashboard() {
                   return (
                     <div
                       key={property.id}
-                      className="flex items-center justify-between p-3 rounded-lg bg-accent/30 border border-border/50"
+                      className="flex items-center justify-between p-3.5 rounded-xl bg-accent/30"
                     >
                       <div>
-                        <p className="text-sm font-medium">{property.title}</p>
+                        <p className="text-sm font-semibold">{property.title}</p>
                         <p className="text-xs text-muted-foreground mt-0.5">
                           by {landlord?.name || "Unknown"} • RM{" "}
                           {property.monthlyRent}/mo
@@ -134,7 +134,7 @@ export function AdminDashboard() {
         </Card>
 
         {/* Recent Reports */}
-        <Card className="border-border/50">
+        <Card>
           <CardHeader className="pb-3">
             <CardTitle className="text-lg flex items-center justify-between">
               Recent Reports
@@ -152,17 +152,17 @@ export function AdminDashboard() {
                 <p className="text-sm">No open reports</p>
               </div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {openReports.map((report) => {
                   const reporter = users.find((u) => u.id === report.reporterId);
                   const target = users.find((u) => u.id === report.targetUserId);
                   return (
                     <div
                       key={report.id}
-                      className="flex items-center justify-between p-3 rounded-lg bg-accent/30 border border-border/50"
+                      className="flex items-center justify-between p-3.5 rounded-xl bg-accent/30"
                     >
                       <div>
-                        <p className="text-sm font-medium">{report.reason}</p>
+                        <p className="text-sm font-semibold">{report.reason}</p>
                         <p className="text-xs text-muted-foreground mt-0.5">
                           {reporter?.name} → {target?.name}
                         </p>
@@ -173,7 +173,7 @@ export function AdminDashboard() {
                             ? "destructive"
                             : "secondary"
                         }
-                        className="text-xs"
+                        className="text-xs capitalize"
                       >
                         {report.status}
                       </Badge>

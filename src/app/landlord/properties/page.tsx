@@ -140,13 +140,13 @@ export default function LandlordPropertiesPage() {
   };
 
   return (
-    <div className="space-y-6 animate-slide-up">
+    <div className="space-y-8 animate-slide-up">
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
+          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
             My Properties 🏘️
           </h1>
-          <p className="text-muted-foreground mt-1">
+          <p className="text-muted-foreground mt-1.5 text-[15px]">
             Manage your property listings.
           </p>
         </div>
@@ -295,11 +295,11 @@ export default function LandlordPropertiesPage() {
           </CardContent>
         </Card>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {myProperties.map((property) => (
             <Card
               key={property.id}
-              className="border-border/50 overflow-hidden hover:shadow-md transition-shadow"
+              className="overflow-hidden hover:shadow-[0_2px_6px_rgba(0,0,0,0.04),0_8px_32px_-4px_rgba(100,80,160,0.10)] transition-all duration-300 hover:-translate-y-0.5"
             >
               <div className="relative h-36">
                 <Image

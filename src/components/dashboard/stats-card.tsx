@@ -26,7 +26,7 @@ export function StatsCard({
   return (
     <Card
       className={cn(
-        "group hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 border-border/50",
+        "group transition-all duration-300 hover:-translate-y-0.5",
         className
       )}
     >
@@ -35,14 +35,14 @@ export function StatsCard({
           <div className="space-y-2">
             <p className="text-sm font-medium text-muted-foreground">{title}</p>
             <div className="flex items-baseline gap-2">
-              <h3 className="text-3xl font-bold tracking-tight">{value}</h3>
+              <h3 className="text-3xl font-extrabold tracking-tight text-foreground">{value}</h3>
               {trend && (
                 <span
                   className={cn(
-                    "text-xs font-semibold px-1.5 py-0.5 rounded-full",
+                    "text-[11px] font-semibold px-2 py-0.5 rounded-full",
                     trend.positive
-                      ? "text-emerald-700 bg-emerald-100"
-                      : "text-red-700 bg-red-100"
+                      ? "text-emerald-700 bg-emerald-50"
+                      : "text-red-700 bg-red-50"
                   )}
                 >
                   {trend.positive ? "↑" : "↓"} {trend.value}
@@ -53,7 +53,7 @@ export function StatsCard({
               <p className="text-xs text-muted-foreground">{description}</p>
             )}
           </div>
-          <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+          <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 group-hover:shadow-md group-hover:shadow-primary/20">
             {icon}
           </div>
         </div>
